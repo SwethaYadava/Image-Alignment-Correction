@@ -1,0 +1,5 @@
+numpy
+pytesseract
+docutils<0.16,>=0.10
+Flask==1.1.1
+imutils==0.5.3

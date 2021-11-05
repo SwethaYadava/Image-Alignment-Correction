@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-alignment-correction-app
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      image-alignment-correction-app: web
+  template:
+    metadata:
+      labels:
+        image-alignment-correction-app: web
+    spec:
+      containers:
+      - name: app-site
+        image: SwethaYadava/image-alignment-correction-app:latest
+        ports:
+        - containerPort: 5000
