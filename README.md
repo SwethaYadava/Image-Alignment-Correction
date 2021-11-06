@@ -7,9 +7,11 @@ An AI method is shown here to determine the alignment of scanned images with the
 After going over the misaligned images folder, i discovered that the images were skewed and rotated, thus this solution will have two stages: first, a skew correction on the original input image, and then an orientation correction on the skew corrected image to produce the final output image.
 
 Stage 1 - Text Skew Correction
+<br/>
 In this stage OpenCV and the cv2 techniques will be used. Our input images include dark text on a light backdrop; however, in order to perform the text skew correction method, we must first flip the image (the text is now light on a dark background – we need the inverse). The image is subsequently binarized using a thresholding procedure. We can now compute the minimal rotational bounding box that contains the text sections using this thresholded image. Find all (x, y)-coordinates that are part of the foreground in the thresholded image. These coordinates are passed to cv2.minAreaRect, which calculates the smallest rotating rectangle that encompasses the whole text region. The angle values returned by the cv2.minAreaRect function are in the range [-90, 0]. Use cv2.getRotationMatrix2D to get the centre coordinates and rotation angle. The actual transformation on the input image to rectify the skewness is subsequently performed using this rotation matrix M.
 
 Stage 2 - Image Orientation Correction
+<br/>
 Although we might utilise a deep learning strategy to detect and correct the orientation, due to resource constraints we will use pytesseract to automatically detect the orientation angle of a scanned image using the image_to_osd function of tesseract. The function returns the image's orientation in degrees, the rotation angle in degrees if one is required, the orientation confidence, and so on. We will adjust the orientation of the skew corrected image based on the rotation angle detected by pytesseract.
 
 
